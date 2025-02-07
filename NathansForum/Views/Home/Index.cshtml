@@ -1,0 +1,51 @@
+﻿@model List<NathansForum.Models.Discussion>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model != null && Model.Any())
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            @{var sortedModel = Model.OrderByDescending(x => x.CreateDate);}
+
+            @foreach (var item in sortedModel)
+            {
+                string imageurl = $"/photos/{item.ImageFileName}";
+
+                <div class="col-md-9 mb-3 border border-info shadow-lg p-2">
+                    <div class="row">
+                        <div class="col-md-4 pe-0">
+                            <a href="@Url.Action("GetDiscussion", "Home", new{id=item.DiscussionId})">
+                                <img alt="@item.Title" src="@imageurl" class="img-thumbnail" style="object-fit:cover; height:180px; width:100%;"/>
+                                </a>
+                        </div>
+                        <div class="col-md-8">
+                            <h1>
+                                @item.Title
+                            </h1>
+                            <h3>
+                                @item.Content
+                            </h3>
+                            <p>
+                                @item.CreateDate.ToString("MM/dd/yyyy - hh:mm tt")
+                            </p>
+                            <span class="badge bg-primary">
+                                @item.Comments.Count
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+}
