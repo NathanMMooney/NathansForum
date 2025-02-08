@@ -6,20 +6,20 @@
 
 @if (Model != null && Model.Any())
 {
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-    </div>
-
     <div class="container-fluid">
+        
         <div class="row">
 
+            <a type="button" class="btn btn-primary mb-3 mt-3" asp-controller="Discussions" asp-action="Create">Create New Discussion</a>
+            
             @{var sortedModel = Model.OrderByDescending(x => x.CreateDate);}
-
+            
             @foreach (var item in sortedModel)
             {
+
                 string imageurl = $"/photos/{item.ImageFileName}";
 
-                <div class="col-md-9 mb-3 border border-info shadow-lg p-2">
+                <div class="col-md-12 mb-3 border border-info shadow-lg p-2">
                     <div class="row">
                         <div class="col-md-4 pe-0">
                             <a href="@Url.Action("GetDiscussion", "Home", new{id=item.DiscussionId})">
@@ -30,9 +30,9 @@
                             <h1>
                                 @item.Title
                             </h1>
-                            <h3>
+                            <p>
                                 @item.Content
-                            </h3>
+                            </p>
                             <p>
                                 @item.CreateDate.ToString("MM/dd/yyyy - hh:mm tt")
                             </p>
@@ -42,10 +42,14 @@
 
                         </div>
                     </div>
+                    
                 </div>
             }
-            <div class="col-md-3">
-            </div>
+            
+            
+            
         </div>
+        
     </div>
+
 }

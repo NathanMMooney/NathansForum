@@ -46,9 +46,13 @@ namespace NathansForum.Controllers
         //}
 
         // GET: Comments/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["DiscussionId"] = new SelectList(_context.Set<Discussion>(), "DiscussionId", "DiscussionId");
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["DiscussionId"] = id;
             return View();
         }
 
@@ -56,16 +60,23 @@ namespace NathansForum.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("Comments/Create/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CommentId,Content,CreateDate,DiscussionId")] Comment comment)
+        public async Task<IActionResult> Create(int? id, [Bind("CommentId,Content,CreateDate")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                comment.DiscussionId = id ?? comment.DiscussionId;
+
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+                return RedirectToAction("GetDiscussion", "Home", new { id = comment.DiscussionId });
             }
-            ViewData["DiscussionId"] = new SelectList(_context.Set<Discussion>(), "DiscussionId", "DiscussionId", comment.DiscussionId);
+
+            ViewData["DiscussionId"] = new SelectList(_context.Discussion, "DiscussionId", "Title", comment.DiscussionId);
+
             return View(comment);
         }
 

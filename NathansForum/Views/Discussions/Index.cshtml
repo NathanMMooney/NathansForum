@@ -6,17 +6,16 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <a type="button" class="btn btn-primary mb-3 mt-3" asp-controller="Discussions" asp-action="Create">Create New Discussion</a>
+    
 <table class="table">
-    <thead>
+    <thead >
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageFile)
+                @Html.DisplayNameFor(model => model.DiscussionId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageFileName)
@@ -29,25 +28,28 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageFile)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageFileName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DiscussionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DiscussionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DiscussionId">Delete</a>
-            </td>
-        </tr>
+           
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscussionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageFileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.DiscussionId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.DiscussionId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.DiscussionId">Delete</a>
+        </td>
+    </tr>
+           
 }
     </tbody>
 </table>
+
