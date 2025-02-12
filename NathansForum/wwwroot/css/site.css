@@ -20,9 +20,25 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: lightgreen;
+    margin-bottom: 60px;
+    background-color: #32236a;
 }
+
+.banner-container {
+    height: 20vh;
+    overflow: hidden; 
+}
+
+.banner-ad {
+    max-height: 20vh; 
+    overflow: hidden; 
+}
+
+    .banner-ad img {
+        width: 100%; 
+        height: 100%;
+        object-fit: cover;
+    }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);

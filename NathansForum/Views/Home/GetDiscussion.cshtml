@@ -4,9 +4,6 @@
     ViewData["Title"] = "Discussion Details";
 }
 
-<h1>Details</h1>
-
-
 <div class="container-fluid bg-white border border-black">
 
     <div class="row">
@@ -51,7 +48,9 @@
     </div>
 </div>
 
-<a type="button" class="btn btn-light mb-3 mt-3" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.DiscussionId">Add a Comment</a>
+<div class="row">
+<a type="button" class="btn btn-primary border-light mb-2 mt-3" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.DiscussionId">Add a Comment</a>
+</div>
 
 @if (Model.Comments != null)
 {
@@ -67,6 +66,5 @@
                 </div>
             </div>
         </div>
-        
     }
 }
